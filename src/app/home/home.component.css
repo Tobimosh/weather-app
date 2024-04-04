@@ -1,0 +1,69 @@
+.container {
+  width: 400px;
+  height: 80vh;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px;
+  padding: 1rem;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.hero {
+  height: 70%;
+  width: 100%;
+  background-color: rgb(73, 167, 225);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 380px;
+  /* Position relative to contain absolute elements */
+}
+
+.heroNav {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding-top: 3px;
+}
+
+.weatherCondition {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+.degree {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.weatherInfo {
+  text-align: center;
+}
+
+.moreInformation {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.graphContainer {
+  position: absolute;
+  bottom: 10px;
+  height: 20vh;
+
+  width: 85%;
+  background-color: pink;
+  border-radius: 20px;
+  padding: 1rem;
+  overflow: hidden;
+  /* max-width: 380px;/ */
+}
