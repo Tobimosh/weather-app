@@ -1,30 +1,38 @@
-
-
-<div class="container">
-    <div class="hero">
-        <div class="heroNav">
-            <div>
-                <img src="" alt="">
-                <span> LocationName</span>
-            </div>
-            <div>
-                Today then time....
-            </div>
-        </div>
-        <div class="weatherCondition">
-            <div class="weatherInfo">
-                <p class="degree">21</p>
-                <p>description</p>
-            </div>
-        </div>
-        <div class="moreInformation">
-            <div>a</div>
-            <div>b</div>
-            <div>c</div>
-        </div>
-
-        <div class="graphContainer">
-            <h2>Temperature</h2>
-        </div>
+<app-container>
+  <div class="hero">
+    <div class="heroNav">
+      <div class="location">
+        <img src="../../assets/images/location.svg" class="iconImage" alt="" />
+        <span>{{ weather?.name }}</span>
+      </div>
+      <div>
+                <!-- {{ currentDate | date }} -->
+      </div>
     </div>
-</div>
+    <div class="weatherCondition">
+      <div class="weatherInfo">
+        <p class="degree">{{ weather?.wind.deg }}°</p>
+        <p>{{ weather?.weather[0].description }}</p>
+      </div>
+    </div>
+    <div class="moreInformation">
+      <div class="pressure">
+        <img src="../../assets/images/pressure.svg" alt="" />
+        {{ weather?.main.pressure }}hpa
+      </div>
+      <div class="humidity">
+        <img src="../../assets/images/humidity.svg" alt="" />
+        {{ weather?.main.humidity }}%
+      </div>
+      <div class="speed">
+        <img src="../../assets/images/speed.svg" alt="" />
+        {{ weather?.wind.speed }}km/h
+      </div>
+    </div>
+
+    <div class="graphContainer">
+      <h2>Temperature</h2>
+    </div>
+  </div>
+  <app-time></app-time>
+</app-container>

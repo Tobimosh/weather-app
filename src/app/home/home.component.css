@@ -1,29 +1,26 @@
-.container {
-  width: 400px;
-  height: 80vh;
-  background-color: antiquewhite;
-  border-radius: 20px;
-  box-shadow: 10px 10px 10px;
-  padding: 1rem;
-  color: white;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-}
+
 
 .hero {
-  height: 70%;
+  height: 60%;
   width: 100%;
-  background-color: rgb(73, 167, 225);
+  background-color: rgb(154, 203, 234);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  align-items: center;
-  position: relative;
+  /* align-items: center; */
+  /* position: relative; */
   overflow: hidden;
   max-width: 380px;
-  /* Position relative to contain absolute elements */
+  margin-bottom: 20px;
+}
+.location{
+display: flex;
+justify-content: center;
+}
+.iconImage{
+  width: 20px;
+  height: 20px;
 }
 
 .heroNav {
@@ -53,17 +50,26 @@
   display: grid;
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 10px;
 }
 
 .graphContainer {
-  position: absolute;
-  bottom: 10px;
-  height: 20vh;
 
-  width: 85%;
+  height: 15vh;
+
+  /* width: 85%; */
   background-color: pink;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 1rem;
   overflow: hidden;
   /* max-width: 380px;/ */
+}
+.moreInformation > div {
+  display: flex;
+  justify-content: center;
+}
+ img{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }

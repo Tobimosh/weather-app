@@ -10,8 +10,8 @@ export class WeatherService {
 
   fetchWeatherCondition(lat: number, lon: number) {
     const params = new HttpParams()
-      .set('lat', lat.toString())
-      .set('lon', lon.toString())
+      .set('lat', lat)
+      .set('lon', lon)
       .set('appid', '9c75934586c8328ec17edc20704f9274');
 
     return this.httpClient.get<WeatherData>(
