@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ForeCastWeather } from '../models/forecastWeather.model';
+import { WeatherForecastService } from '../weather-forecast.service';
 
 @Component({
   selector: 'app-time',
@@ -10,31 +12,22 @@ import { RouterLink } from '@angular/router';
   styleUrl: './time.component.css',
 })
 export class TimeComponent {
-  items = [
-    {
-      time: '12pm',
-      img: '../../assets/5311351.png',
-      deg: '23',
-    },
-    {
-      time: '12pm',
-      img: '../../assets/5311351.png',
-      deg: '23',
-    },
-    {
-      time: '12pm',
-      img: '../../assets/5311351.png',
-      deg: '23',
-    },
-    {
-      time: '12pm',
-      img: '../../assets/5311351.png',
-      deg: '23',
-    },
-    {
-      time: '12pm',
-      img: '../../assets/5311351.png',
-      deg: '23',
-    },
-  ];
+  @Input() forecastData: ForeCastWeather;
+
+  constructor() {}
+
+  getTime(dateTimeString: string): string {
+    const date = new Date(dateTimeString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${this.padZero(hours)}:${this.padZero(minutes)}`;
+  }
+
+  padZero(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
+  }
+
+  getWeatherIconUrl(icon: string): string {
+    return `assets/icons/${icon}.png`;
+  }
 }

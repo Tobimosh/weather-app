@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FutureForecastRoutingModule } from './future-forecast-routing.module';
+import { WeatherRoutingModule } from './weather-routing.module';
+
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    FutureForecastRoutingModule
+    WeatherRoutingModule
   ]
 })
-export class FutureForecastModule { }
+export class WeatherModule { }

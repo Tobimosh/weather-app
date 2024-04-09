@@ -1,13 +1,38 @@
 
 
-<app-container >
-    <div class="weather-column">
-        <div class="day">
-            <span class="day-name">Monday</span>
-            <span class="date">24th March</span>
-        </div>
-        <div class="degree">21°C</div>
-        <img class="icon" src="icon.png" alt="Weather Icon">
-    </div>
+<app-container>
+  <div class="body">
+    <nav class="navBar">
+      <a routerLink="">
+        <img src="../../../assets/images/arrow.svg" alt="" />
+      </a>
+    </nav>
+    <p class="subHeading">Today</p>
+    <div *ngIf="weatherDetails">
+      <app-time [forecastData]="weatherDetails"></app-time>
 
+      <ng-container
+        *ngFor="let dayWeatherGroup of groupByDay(weatherDetails.list)"
+      >
+        <div class="container">
+          <div class="weather-column">
+            <div class="day">
+              <p class="day-name">
+                {{ getDayName(dayWeatherGroup[0]?.dt_txt) }}
+              </p>
+              <p class="date">{{ getDate(dayWeatherGroup[0]?.dt_txt) }}</p>
+            </div>
+            <div class="degree">{{ dayWeatherGroup[0]?.main.temp }}°C</div>
+            <img
+              class="icon"
+              src="http://openweathermap.org/img/wn/{{
+                dayWeatherGroup[0]?.weather[0].icon
+              }}.png"
+              alt="Weather Icon"
+            />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </app-container>

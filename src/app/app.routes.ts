@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './weather/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { WeatherHomeComponent } from './weather/weather-home/weather-home.component';
 
 export const routes: Routes = [
   {
@@ -11,12 +12,16 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'search-location',
+    loadChildren: () =>
+      import('./search/search.module').then((m) => m.SearchModule),
+  },
+  {
     path: '',
-    component: HomeComponent
+    component: WeatherHomeComponent,
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
-
+    component: NotFoundComponent,
+  },
 ];

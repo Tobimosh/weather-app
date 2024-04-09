@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DaysComponent } from './days/days.component';
+import { SearchLocationComponent } from '../weather/search-location/search-location.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DaysComponent,
+    component: SearchLocationComponent,
   },
 ];
 
@@ -13,6 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FutureForecastRoutingModule {}
-
-
+export class SearchRoutingModule {}

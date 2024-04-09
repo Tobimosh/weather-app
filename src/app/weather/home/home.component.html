@@ -6,7 +6,7 @@
         <span>{{ weather?.name }}</span>
       </div>
       <div>
-                <!-- {{ currentDate | date }} -->
+        {{ currentTime  }}
       </div>
     </div>
     <div class="weatherCondition">
@@ -34,5 +34,13 @@
       <h2>Temperature</h2>
     </div>
   </div>
-  <app-time></app-time>
+  <div class="headerContainer">
+    <p>Today</p>
+    <a routerLink="./seven-days-forecast">Next 5days</a>
+  </div>
+  <ng-container *ngIf="forecastService">
+    <app-time [forecastData]="forecastService"></app-time>
+  </ng-container>
+
+  <app-footer></app-footer>
 </app-container>

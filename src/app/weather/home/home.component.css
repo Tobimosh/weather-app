@@ -7,11 +7,12 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  /* align-items: center; */
+  /* padding: 1rem; */
+  padding: 10px;
   /* position: relative; */
   overflow: hidden;
   max-width: 380px;
+  
   margin-bottom: 20px;
 }
 .location{
@@ -55,13 +56,14 @@ justify-content: center;
 
 .graphContainer {
 
-  height: 15vh;
+  height: 10vh;
 
   /* width: 85%; */
   background-color: pink;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 10px;
   overflow: hidden;
+  flex-grow: 1;
   /* max-width: 380px;/ */
 }
 .moreInformation > div {
@@ -72,4 +74,11 @@ justify-content: center;
   width: 20px;
   height: 20px;
   margin-right: 5px;
+}
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+
 }

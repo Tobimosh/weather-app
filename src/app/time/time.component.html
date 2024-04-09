@@ -1,15 +1,11 @@
 <div class="section">
-  <div class="headerContainer">
-    <p>Today</p>
-    <a routerLink="./seven-days-forecast">Next 7 days</a>
-  </div>
   <div class="conditionContainer">
-    <div *ngFor="let item of items" class="weatherCondition">
-        <p>{{item.time}}</p>
-        <img [src]="item.img" alt="" />
-        <p>{{item.deg}}</p>
+    <div *ngFor="let item of forecastData.list" class="weatherCondition">
+      <p>{{ getTime(item.dt_txt) }}</p>
+              <img class="icon" src="http://openweathermap.org/img/wn/{{
+                            item.weather[0].icon
+                          }}.png" alt="Weather Icon" />
+      <p>{{ item.wind.deg }}°</p>
     </div>
-
   </div>
-
 </div>

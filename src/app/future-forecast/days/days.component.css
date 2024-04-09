@@ -1,16 +1,32 @@
 .weather-column {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
+.navBar{
+    margin-bottom: 25px;
+    padding-top: 15px;
+}
+/* .body{
+    background-image: url('../../../assets/images/bg.jpg');
+    background-repeat: no-repeat;
+} */
 
+.subHeading{
+    margin-bottom: 20px;
+}
+.container{
+    margin-bottom: 20px
+}
 .day {
-    text-align: center;
     margin-bottom: 5px;
 }
 
 .day-name {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .date {
