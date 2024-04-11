@@ -24,7 +24,7 @@ export class WeatherService {
         {
           params: params,
         }
-      );
+      )
     }
   }
 }

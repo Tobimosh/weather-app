@@ -1,46 +1,44 @@
-<app-container>
-  <div class="hero">
-    <div class="heroNav">
-      <div class="location">
-        <img src="../../assets/images/location.svg" class="iconImage" alt="" />
-        <span>{{ weather?.name }}</span>
-      </div>
-      <div>
-        {{ currentTime  }}
-      </div>
-    </div>
-    <div class="weatherCondition">
-      <div class="weatherInfo">
-        <p class="degree">{{ weather?.wind.deg }}°</p>
-        <p>{{ weather?.weather[0].description }}</p>
-      </div>
-    </div>
-    <div class="moreInformation">
-      <div class="pressure">
-        <img src="../../assets/images/pressure.svg" alt="" />
-        {{ weather?.main.pressure }}hpa
-      </div>
-      <div class="humidity">
-        <img src="../../assets/images/humidity.svg" alt="" />
-        {{ weather?.main.humidity }}%
-      </div>
-      <div class="speed">
-        <img src="../../assets/images/speed.svg" alt="" />
-        {{ weather?.wind.speed }}km/h
-      </div>
-    </div>
 
-    <div class="graphContainer">
-      <h2>Temperature</h2>
+<div class="hero rounded-lg w-full flex flex-col p-4 mb-5" [ngStyle]="{'background-image': 'url(' + getBackgroundImage() + ')'}">
+  <div class=" flex justify-between text-white pt-1">
+    <div class=" flex items-center">
+      <img src="../../assets/images/location.svg" class="iconImage w-5 h-5" alt="" />
+      <span>{{ weather?.name }}</span>
+    </div>
+    <div>{{ currentTime }}</div>
+  </div>
+  <div class=" flex justify-center my-5">
+    <div class="my-2 text-center">
+      <p class="degree text-6xl mb-4">{{ weather?.wind.deg }}°</p>
+      <p>{{ weather?.weather[0].description }}</p>
     </div>
   </div>
-  <div class="headerContainer">
-    <p>Today</p>
-    <a routerLink="./seven-days-forecast">Next 5days</a>
+  <div class=" grid grid-cols-3 w-full mb-4">
+    <div class="pressure flex items-center">
+      <img src="../../assets/images/pressure.svg" alt="" class="w-5 h-5 mr-1" />
+      {{ weather?.main.pressure }}hpa
+    </div>
+    <div class="humidity flex items-center">
+      <img src="../../assets/images/humidity.svg" alt="" class="w-5 h-5 mr-1" />
+      {{ weather?.main.humidity }}%
+    </div>
+    <div class="speed flex items-center">
+      <img src="../../assets/images/speed.svg" alt="" class="w-5 h-5 mr-1" />
+      {{ weather?.wind.speed }}km/h
+    </div>
   </div>
-  <ng-container *ngIf="forecastService">
-    <app-time [forecastData]="forecastService"></app-time>
-  </ng-container>
 
-  <app-footer></app-footer>
-</app-container>
+  <div class="bg-pink-200 rounded-lg p-4 min-h-[144px]  flex justify-center ">
+
+    <app-graph [forecastData]="forecastWeather"></app-graph>
+  </div>
+</div>
+
+<div class="headerContainer flex justify-between mb-4">
+  <p>Today</p>
+  <a routerLink="./seven-days-forecast">Next 5days</a>
+</div>
+
+<ng-container *ngIf="forecastWeather">
+  <app-time [forecastData]="forecastWeather"></app-time>
+</ng-container>

@@ -1,15 +1,14 @@
-import { Component, Input, Pipe } from '@angular/core';
-import { faLocation } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContainerComponent } from '../../container/container.component';
-import { Main, Weather, WeatherData } from '../../models/weather.model';
-import { CommonModule, DatePipe } from '@angular/common';
-import { Subscription, interval } from 'rxjs';
-import { TimeComponent } from '../../time/time.component';
-import { RouterLink } from '@angular/router';
-import { WeatherForecastService } from '../../weather-forecast.service';
 import { ForeCastWeather } from '../../models/forecastWeather.model';
+import { WeatherData } from '../../models/weather.model';
+import { TimeComponent } from '../../time/time.component';
+import { WeatherForecastService } from '../../weather-forecast.service';
 import { FooterComponent } from '../footer/footer.component';
+import { GraphComponent } from '../graph/graph.component';
 
 @Component({
   selector: 'app-home',
@@ -22,23 +21,20 @@ import { FooterComponent } from '../footer/footer.component';
     RouterLink,
     CommonModule,
     FooterComponent,
+    GraphComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
   @Input() weather: WeatherData;
+  @Input() forecastWeather: ForeCastWeather;
   currentTime: string;
 
-  forecastService: ForeCastWeather;
   constructor(private weatherService: WeatherForecastService) {
     this.currentTime = this.getCurrentTime();
   }
 
-  ngOnInit() {
-    this.forecastService = this.weatherService.getForecastData();
-    console.log(this.forecastService);
-  }
   private getCurrentTime(): string {
     const now = new Date();
     const currentHour = now.getHours();
@@ -56,5 +52,75 @@ export class HomeComponent {
       currentMinute < 10 ? '0' + currentMinute : currentMinute
     }${meridian}`;
     return formattedTime;
+  }
+
+  calculateWeatherCondition(): string {
+    if (!this.weather) {
+      return 'unknown';
+    }
+
+    const currentDate = new Date();
+    const sunriseTime = new Date(this.weather.sys.sunrise * 1000); // Convert seconds to milliseconds
+    const sunsetTime = new Date(this.weather.sys.sunset * 1000); // Convert seconds to milliseconds
+
+    // Check if it's currently day or night
+    const isDaytime = currentDate >= sunriseTime && currentDate < sunsetTime;
+
+    // Extract weather condition
+    const mainWeather = this.weather.weather[0]?.main.toLowerCase();
+
+    // Determine weather condition based on day/night and main weather
+    if (isDaytime) {
+      switch (mainWeather) {
+        case 'rain':
+          return 'day-rainy';
+        case 'clear':
+          return 'day-clear';
+        case 'clouds':
+          return 'day-cloudy';
+        case 'snow':
+          return 'day-snowy';
+        default:
+          return 'day-unknown';
+      }
+    } else {
+      switch (mainWeather) {
+        case 'rain':
+          return 'night-rainy';
+        case 'clear':
+          return 'night-clear';
+        case 'clouds':
+          return 'night-cloudy';
+        case 'snow':
+          return 'night-snowy';
+        default:
+          return 'night-unknown';
+      }
+    }
+  }
+  getBackgroundImage(): string {
+    const weatherCondition = this.calculateWeatherCondition();
+    const isDaytime = weatherCondition.includes('day');
+
+    switch (weatherCondition) {
+      case 'day-rainy':
+        return '../../../assets/images/rainyNight.avif';
+      case 'day-clear':
+        return '../../../assets/images/clear.avif';
+      case 'day-cloudy':
+        return '../../../assets/images/clouddAY.webp';
+      case 'day-snowy':
+        return '../../assets/images/day-snowy-background.jpg';
+      case 'night-rainy':
+        return '../../../assets/images/rainyNight.avif';
+      case 'night-clear':
+        return '../../../assets/images/clearnight.avif';
+      case 'night-cloudy':
+        return '../../assets/images/night-cloudy-background.jpg';
+      case 'night-snowy':
+        return '../../assets/images/night-snowy-background.jpg';
+      default:
+        return ''; // You can provide a default background image or handle other conditions as needed
+    }
   }
 }

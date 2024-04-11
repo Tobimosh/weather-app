@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ContainerComponent } from '../../container/container.component';
 import { TimeComponent } from '../../time/time.component';
 import { RouterLink } from '@angular/router';
 import { ForeCastWeather } from '../../models/forecastWeather.model';
 import { WeatherForecastService } from '../../weather-forecast.service';
 import { CommonModule } from '@angular/common';
+import { WeatherData } from '../../models/weather.model';
 
 @Component({
   selector: 'app-days',
@@ -14,54 +15,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './days.component.css',
 })
 export class DaysComponent {
-  weatherDetails: ForeCastWeather = null;
+  @Input() forecastData: ForeCastWeather;
+  @Input() weatherData: WeatherData;
   latitude: number;
   longitude: number;
   errorMessage: string;
 
-  constructor(private weatherService: WeatherForecastService) {}
 
-  ngOnInit() {
-    this.getLocation();
-  }
-
-  getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position: GeolocationPosition) => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          this.fetchWeather();
-        },
-        (error: GeolocationPositionError) => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              this.errorMessage = 'User denied the request for Geolocation.';
-              break;
-            case error.POSITION_UNAVAILABLE:
-              this.errorMessage = 'Location information is unavailable.';
-              break;
-            case error.TIMEOUT:
-              this.errorMessage = 'The request to get user location timed out.';
-              break;
-          }
-        }
-      );
-    } else {
-      this.errorMessage = 'Geolocation is not supported by this browser.';
-    }
-  }
-
-  fetchWeather() {
-    this.weatherService
-      .fetchWeatherCondition(this.latitude, this.longitude)
-      .subscribe((res) => {
-        this.weatherDetails = res;
-        console.log(res);
-        console.log(this.weatherDetails.list.length);
-        this.weatherService.setForecastData(res);
-      });
-  }
   getDayName(dateTimeString: string): string {
     const date = new Date(dateTimeString);
     const days = [

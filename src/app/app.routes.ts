@@ -12,13 +12,8 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'search-location',
-    loadChildren: () =>
-      import('./search/search.module').then((m) => m.SearchModule),
-  },
-  {
     path: '',
-    component: WeatherHomeComponent,
+    loadChildren: () => import('./weather/weather-routing.module').then((m) => m.WeatherRoutingModule),
   },
   {
     path: '**',

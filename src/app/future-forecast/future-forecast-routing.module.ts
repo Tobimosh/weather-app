@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DaysComponent } from './days/days.component';
+import { DaysHomeComponent } from './days-home/days-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DaysComponent,
+    component: DaysHomeComponent,
   },
 ];
 

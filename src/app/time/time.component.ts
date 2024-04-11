@@ -14,7 +14,11 @@ import { WeatherForecastService } from '../weather-forecast.service';
 export class TimeComponent {
   @Input() forecastData: ForeCastWeather;
 
+
   constructor() {}
+  ngOnInit(){
+    console.log(this.forecastData)
+  }
 
   getTime(dateTimeString: string): string {
     const date = new Date(dateTimeString);

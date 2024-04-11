@@ -6,7 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { withFetch } from '@angular/common/http';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     importProvidersFrom(HttpClientModule),
     // provideHttpClient(withFetch()),
+
   ],
 };

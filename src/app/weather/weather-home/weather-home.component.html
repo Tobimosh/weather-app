@@ -1,1 +1,9 @@
-<app-home [weather]="weatherDetails"></app-home>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<ng-container *ngIf="weatherDetails && forecastDetails">
+    <app-home [weather]="weatherDetails" [forecastWeather]="forecastDetails"></app-home>
+
+</ng-container>
+
