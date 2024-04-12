@@ -1,5 +1,5 @@
 <app-container>
-  <div class="body  max-w-[320px] mx-auto">
+  <div class="body max-w-[320px] mx-auto">
     <nav class="flex justify-between mb-6 pt-3 mr-3">
       <a routerLink="/">
         <img src="../../../assets/images/arrow.svg" alt="" />
@@ -8,19 +8,33 @@
     </nav>
     <p class="mb-4">Today</p>
     <div>
-      <app-time [forecastData]="forecastData"></app-time>
-
-      <ng-container *ngFor="let dayWeatherGroup of groupByDay(forecastData.list)">
-        <div class=" mb-4">
-          <div class="grid grid-cols-3 items-center gap-20">
-            <div class="day">
-              <p class="font-bold mb-1">{{ getDayName(dayWeatherGroup[0]?.dt_txt) }}</p>
-              <p class="text-[10px]">{{ getDate(dayWeatherGroup[0]?.dt_txt) }}</p>
+      <ng-container *ngIf="forecastData">
+        <app-time [forecastData]="forecastData"></app-time>
+        <ng-container
+          *ngFor="let dayWeatherGroup of groupByDay(forecastData.list)"
+        >
+          <div class="mb-4">
+            <div class="grid grid-cols-3 items-center gap-20">
+              <div class="day">
+                <p class="font-bold mb-1">
+                  {{ getDayName(dayWeatherGroup[0]?.dt_txt) }}
+                </p>
+                <p class="text-[10px]">
+                  {{ getDate(dayWeatherGroup[0]?.dt_txt) }}
+                </p>
+              </div>
+              <div class="degree">{{ dayWeatherGroup[0]?.main.temp }}°C</div>
+              <img
+                *ngIf="dayWeatherGroup[0]?.weather[0]?.icon"
+                class="w-12 h-12"
+                src="http://openweathermap.org/img/wn/{{
+                  dayWeatherGroup[0].weather[0].icon
+                }}.png"
+                alt="Weather Icon"
+              />
             </div>
-            <div class="degree">{{ dayWeatherGroup[0]?.main.temp }}°C</div>
-            <img class="w-12 h-12" src="http://openweathermap.org/img/wn/{{ dayWeatherGroup[0]?.weather[0].icon }}.png" alt="Weather Icon" />
           </div>
-        </div>
+        </ng-container>
       </ng-container>
     </div>
   </div>
