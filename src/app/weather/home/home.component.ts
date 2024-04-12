@@ -60,16 +60,13 @@ export class HomeComponent {
     }
 
     const currentDate = new Date();
-    const sunriseTime = new Date(this.weather.sys.sunrise * 1000); // Convert seconds to milliseconds
-    const sunsetTime = new Date(this.weather.sys.sunset * 1000); // Convert seconds to milliseconds
+    const sunriseTime = new Date(this.weather.sys.sunrise * 1000);
+    const sunsetTime = new Date(this.weather.sys.sunset * 1000);
 
-    // Check if it's currently day or night
     const isDaytime = currentDate >= sunriseTime && currentDate < sunsetTime;
 
-    // Extract weather condition
     const mainWeather = this.weather.weather[0]?.main.toLowerCase();
 
-    // Determine weather condition based on day/night and main weather
     if (isDaytime) {
       switch (mainWeather) {
         case 'rain':
@@ -80,6 +77,8 @@ export class HomeComponent {
           return 'day-cloudy';
         case 'snow':
           return 'day-snowy';
+        case 'thunderstorm':
+          return 'thunderstorm';
         default:
           return 'day-unknown';
       }
@@ -93,11 +92,18 @@ export class HomeComponent {
           return 'night-cloudy';
         case 'snow':
           return 'night-snowy';
+        case 'thunderstorm':
+          return 'thunderstorm'
         default:
           return 'night-unknown';
       }
     }
   }
+
+  kelvinToCelsius(tempKelvin: number): number {
+    return Math.floor(tempKelvin - 273.15);
+  }
+
   getBackgroundImage(): string {
     const weatherCondition = this.calculateWeatherCondition();
     const isDaytime = weatherCondition.includes('day');
@@ -113,10 +119,14 @@ export class HomeComponent {
         return '../../assets/images/day-snowy-background.jpg';
       case 'night-rainy':
         return '../../../assets/images/rainyNight.avif';
+      case 'day-thunderstorm':
+        return '../../../assets/images/thunderstorm.webp';
+      case 'night-thunderstorm':
+        return '../../../assets/images/thunderstorm.webp';
       case 'night-clear':
         return '../../../assets/images/clearnight.avif';
       case 'night-cloudy':
-        return '../../assets/images/night-cloudy-background.jpg';
+        return '../../../assets/images/nightCloud.webp';
       case 'night-snowy':
         return '../../assets/images/night-snowy-background.jpg';
       default:

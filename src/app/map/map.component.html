@@ -1,0 +1,9 @@
+<!-- map.component.html -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> loading map... </p>
+</ngx-spinner>
+<div id="map" class="map-container relative h-[85%] w-full"></div>
+
+<div *ngIf="map" class="search-container absolute top-7 left-5 right-5 w-[280px]">
+    <input type="text" placeholder="Search..." class=" p-4 w-full rounded-xl"/>
+</div>

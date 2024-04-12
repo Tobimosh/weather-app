@@ -28,7 +28,7 @@ export class WeatherHomeComponent {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.getLocation();
   }
 

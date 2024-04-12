@@ -16,7 +16,7 @@ import { WeatherData } from '../../models/weather.model';
 })
 export class DaysComponent {
   @Input() forecastData: ForeCastWeather;
-  @Input() weatherData: WeatherData;
+  // @Input() weatherData: WeatherData;
   latitude: number;
   longitude: number;
   errorMessage: string;
@@ -33,6 +33,8 @@ export class DaysComponent {
       'Friday',
       'Saturday',
     ];
+        // console.log(this.weatherData);
+
     return days[date.getDay()];
   }
 

@@ -1,19 +1,25 @@
-
-<div class="hero rounded-lg w-full flex flex-col p-4 mb-5" [ngStyle]="{'background-image': 'url(' + getBackgroundImage() + ')'}">
-  <div class=" flex justify-between text-white pt-1">
-    <div class=" flex items-center">
-      <img src="../../assets/images/location.svg" class="iconImage w-5 h-5" alt="" />
+<div
+  class="hero rounded-lg w-full flex flex-col p-4 mb-5 text-white"
+  [ngStyle]="{ 'background-image': 'url(' + getBackgroundImage() + ')' }"
+>
+  <div class="flex justify-between text-white pt-1">
+    <div class="flex items-center">
+      <img
+        src="../../assets/images/location.svg"
+        class="iconImage w-5 h-5"
+        alt=""
+      />
       <span>{{ weather?.name }}</span>
     </div>
     <div>{{ currentTime }}</div>
   </div>
-  <div class=" flex justify-center my-5">
+  <div class="flex justify-center my-5">
     <div class="my-2 text-center">
-      <p class="degree text-6xl mb-4">{{ weather?.wind.deg }}°</p>
+      <p class="degree text-6xl mb-4">{{ kelvinToCelsius((weather.main.temp_max + weather.main.temp_min) / 2) }}°</p>
       <p>{{ weather?.weather[0].description }}</p>
     </div>
   </div>
-  <div class=" grid grid-cols-3 w-full mb-4">
+  <div class="grid grid-cols-3 w-full mb-4">
     <div class="pressure flex items-center">
       <img src="../../assets/images/pressure.svg" alt="" class="w-5 h-5 mr-1" />
       {{ weather?.main.pressure }}hpa
@@ -28,15 +34,15 @@
     </div>
   </div>
 
-  <div class="bg-pink-200 rounded-lg p-4 min-h-[144px]  flex justify-center ">
-
+  <div class="bg-[#5c6778] rounded-lg p-4 min-h-[144px] flex flex-col justify-center">
+    <h2 class="text-md mb-2 ">Temperature</h2>
     <app-graph [forecastData]="forecastWeather"></app-graph>
   </div>
 </div>
 
 <div class="headerContainer flex justify-between mb-4">
   <p>Today</p>
-  <a routerLink="./seven-days-forecast">Next 5days</a>
+  <a routerLink="/five-days-forecast" class="underline">Next 5days</a>
 </div>
 
 <ng-container *ngIf="forecastWeather">

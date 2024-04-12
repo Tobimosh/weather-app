@@ -5,7 +5,7 @@ import { WeatherHomeComponent } from './weather/weather-home/weather-home.compon
 
 export const routes: Routes = [
   {
-    path: 'seven-days-forecast',
+    path: 'five-days-forecast',
     loadChildren: () =>
       import('./future-forecast/future-forecast.module').then(
         (m) => m.FutureForecastModule

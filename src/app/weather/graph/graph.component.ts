@@ -84,13 +84,16 @@ export class GraphComponent {
       type: 'line',
       data: {
         labels: ['Morning', 'Afternoon', 'Evening', 'Night'],
+
         datasets: [
           {
             data: temperatureAverages,
             borderWidth: 1,
             fill: false,
-            borderColor: '#3e95ccd',
+            borderColor: 'white',
+
             label: 'Temperature',
+
             pointRadius: 4,
             indexAxis: 'x',
             tension: 0.3,
@@ -102,6 +105,22 @@ export class GraphComponent {
         scales: {
           y: {
             display: false,
+          },
+          x: {
+            ticks: {
+              color: 'white',
+              font: {
+                size: 10,
+              },
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+            labels: {
+              color: 'white',
+            },
           },
         },
       },

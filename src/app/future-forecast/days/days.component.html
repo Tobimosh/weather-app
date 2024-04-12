@@ -1,17 +1,17 @@
 <app-container>
-  <div class="body  min-w-[320px] sm:max-w-md mx-auto">
-    <nav class="navBar mb-6 pt-3 mr-3">
-      <a routerLink="">
+  <div class="body  max-w-[320px] mx-auto">
+    <nav class="flex justify-between mb-6 pt-3 mr-3">
+      <a routerLink="/">
         <img src="../../../assets/images/arrow.svg" alt="" />
       </a>
       <!-- <span>{{weatherData?.name}}</span> -->
     </nav>
-    <p class="subHeading mb-4">Today</p>
-    <div *ngIf="forecastData">
+    <p class="mb-4">Today</p>
+    <div>
       <app-time [forecastData]="forecastData"></app-time>
 
       <ng-container *ngFor="let dayWeatherGroup of groupByDay(forecastData.list)">
-        <div class="container mb-4">
+        <div class=" mb-4">
           <div class="grid grid-cols-3 items-center gap-20">
             <div class="day">
               <p class="font-bold mb-1">{{ getDayName(dayWeatherGroup[0]?.dt_txt) }}</p>

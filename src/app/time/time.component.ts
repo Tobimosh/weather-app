@@ -14,10 +14,11 @@ import { WeatherForecastService } from '../weather-forecast.service';
 export class TimeComponent {
   @Input() forecastData: ForeCastWeather;
 
-
   constructor() {}
-  ngOnInit(){
-    console.log(this.forecastData)
+ 
+
+  kelvinToCelsius(tempKelvin: number): number {
+    return Math.floor(tempKelvin - 273.15);
   }
 
   getTime(dateTimeString: string): string {
