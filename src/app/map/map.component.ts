@@ -12,7 +12,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 export class MapComponent implements OnInit {
 
 
-  public map: L.Map;
+  public myMap: L.Map;
   private centroid: L.LatLngExpression;
 private currentLocationMarker: any;
 
@@ -27,16 +27,16 @@ private async initMap(): Promise<void> {
   if (isPlatformBrowser(this.platformId)) {
     const L = await import('leaflet');
     console.log(L)
-    this.map =  L?.map('map', {
+    this.myMap =  L?.map('map', {
       center: this.centroid,
       zoom: 10,
       zoomControl: false,
     }).fitWorld();
 
     console.log(typeof L.map)
-    console.log(typeof this.map)
+    console.log(typeof this.myMap)
 
-    console.log('initialised map', this.map)
+    console.log('initialised map', this.myMap)
 
     const tiles = L.tileLayer(
       'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -62,8 +62,8 @@ private async initMap(): Promise<void> {
           'A random location on the map'
         )
       )
-      .forEach((x) => x.addTo(this.map));
-    tiles.addTo(this.map);
+      .forEach((x) => x.addTo(this.myMap));
+    tiles.addTo(this.myMap);
   }
 }
 
@@ -79,7 +79,7 @@ getLocation() {
           ];
           this.initMap().then(() => {
             this.addCurrentLocationMarker(this.centroid);
-            this.map.setView(this.centroid, 10);
+            this.myMap.setView(this.centroid, 10);
             this.spinner.hide();
           });
         },
@@ -106,7 +106,7 @@ private async addCurrentLocationMarker(
     });
     this.currentLocationMarker = L.marker(coordinates, {
       icon: markerIcon,
-    }).addTo(this.map);
+    }).addTo(this.myMap);
     this.currentLocationMarker.bindPopup('Where you at').openPopup();
   }
 }
