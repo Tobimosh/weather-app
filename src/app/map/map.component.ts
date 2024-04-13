@@ -27,7 +27,7 @@ private async initMap(): Promise<void> {
   if (isPlatformBrowser(this.platformId)) {
     const L = await import('leaflet');
     console.log(L)
-    this.map =  L.map('map', {
+    this.map = new L.Map('map', {
       center: this.centroid,
       zoom: 10,
       zoomControl: false,
