@@ -2,14 +2,12 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './weather/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { WeatherHomeComponent } from './weather/weather-home/weather-home.component';
+import { DaysHomeComponent } from './future-forecast/days-home/days-home.component';
 
 export const routes: Routes = [
   {
     path: 'five-days-forecast',
-    loadChildren: () =>
-      import('./future-forecast/future-forecast.module').then(
-        (m) => m.FutureForecastModule
-      ),
+    component: DaysHomeComponent
   },
   {
     path: '',

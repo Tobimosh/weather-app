@@ -1,13 +1,13 @@
 <div class="section">
   <div class="conditionContainer">
-    <div *ngFor="let item of forecastData.list" class="weatherCondition">
-      <p>{{ getTime(item.dt_txt) }}</p>
+    <div *ngFor="let item of forecastData?.list" class="weatherCondition">
+      <p>{{ getTime(item?.dt_txt) }}</p>
       <img
         class="icon"
-        src="http://openweathermap.org/img/wn/{{ item.weather[0].icon }}.png"
+        src="http://openweathermap.org/img/wn/{{ item?.weather[0].icon }}.png"
         alt="Weather Icon"
       />
-      <p>{{ kelvinToCelsius(item.wind.deg) }}°</p>
+      <p>{{ kelvinToCelsius(item?.wind.deg) }}°</p>
     </div>
   </div>
 </div>

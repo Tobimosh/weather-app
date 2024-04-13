@@ -8,33 +8,20 @@
     </nav>
     <p class="mb-4">Today</p>
     <div>
-      <ng-container *ngIf="forecastData">
-        <app-time [forecastData]="forecastData"></app-time>
-        <ng-container
-          *ngFor="let dayWeatherGroup of groupByDay(forecastData.list)"
-        >
-          <div class="mb-4">
-            <div class="grid grid-cols-3 items-center gap-20">
-              <div class="day">
-                <p class="font-bold mb-1">
-                  {{ getDayName(dayWeatherGroup[0]?.dt_txt) }}
-                </p>
-                <p class="text-[10px]">
-                  {{ getDate(dayWeatherGroup[0]?.dt_txt) }}
-                </p>
-              </div>
-              <div class="degree">{{ dayWeatherGroup[0]?.main.temp }}°C</div>
-              <img
-                *ngIf="dayWeatherGroup[0]?.weather[0]?.icon"
-                class="w-12 h-12"
-                src="http://openweathermap.org/img/wn/{{
-                  dayWeatherGroup[0].weather[0].icon
-                }}.png"
-                alt="Weather Icon"
-              />
+      <app-time [forecastData]="forecastData"></app-time>
+      <ng-container *ngFor="let dayWeatherGroup of groupByDay(forecastData?.list)">
+        <div class="mb-4">
+          <div class="grid grid-cols-3 items-center gap-20">
+            <div class="day">
+              <p class="font-bold mb-1">{{ getDayName(dayWeatherGroup.dt_txt) }}</p>
+              <p class="text-[10px]">{{ getDate(dayWeatherGroup.dt_txt) }}</p>
             </div>
+            <div class="degree">{{ dayWeatherGroup.main.temp }}°C</div>
+            <img *ngIf="dayWeatherGroup.weather[0]?.icon" class="w-12 h-12"
+              [src]="'http://openweathermap.org/img/wn/' + dayWeatherGroup.weather[0]?.icon + '.png'"
+              alt="Weather Icon" />
           </div>
-        </ng-container>
+        </div>
       </ng-container>
     </div>
   </div>

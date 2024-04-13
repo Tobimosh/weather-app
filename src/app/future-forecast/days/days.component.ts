@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ContainerComponent } from '../../container/container.component';
 import { TimeComponent } from '../../time/time.component';
 import { RouterLink } from '@angular/router';
-import { ForeCastWeather } from '../../models/forecastWeather.model';
+import { ForeCastWeather, List } from '../../models/forecastWeather.model';
 import { WeatherForecastService } from '../../weather-forecast.service';
 import { CommonModule } from '@angular/common';
 import { WeatherData } from '../../models/weather.model';
@@ -21,7 +21,6 @@ export class DaysComponent {
   longitude: number;
   errorMessage: string;
 
-
   getDayName(dateTimeString: string): string {
     const date = new Date(dateTimeString);
     const days = [
@@ -33,8 +32,6 @@ export class DaysComponent {
       'Friday',
       'Saturday',
     ];
-        // console.log(this.weatherData);
-
     return days[date.getDay()];
   }
 
@@ -61,20 +58,29 @@ export class DaysComponent {
     return months[monthIndex];
   }
 
-  groupByDay(list: any[]): any[][] {
-    const result: any[][] = [];
-    const dayMap: Map<string, any[]> = new Map();
+ 
+  groupByDay(list: List[]): List[] {
+    const result: List[] = [];
+    const dayMap: Map<string, List> = new Map();
+
+    if (!Array.isArray(list)) return result;
+
     for (const item of list) {
       const date = new Date(item.dt_txt);
       const dateString = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
+
       if (!dayMap.has(dateString)) {
-        dayMap.set(dateString, []);
+        dayMap.set(dateString, item);
+        result.push(item);
       }
-      dayMap.get(dateString).push(item);
     }
-    dayMap.forEach((value) => result.push(value));
+
     return result;
+  }
+
+  groupedData() {
+    return this.groupByDay(this.forecastData?.list);
   }
 }
