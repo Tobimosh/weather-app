@@ -27,11 +27,14 @@ private async initMap(): Promise<void> {
   if (isPlatformBrowser(this.platformId)) {
     const L = await import('leaflet');
     console.log(L)
-    this.map = new L.Map('map', {
+    this.map =  L.map('map', {
       center: this.centroid,
       zoom: 10,
       zoomControl: false,
     }).fitWorld();
+
+    console.log(typeof L.map)
+    console.log(typeof this.map)
 
     console.log('initialised map', this.map)
 
@@ -48,18 +51,18 @@ private async initMap(): Promise<void> {
       iconSize: [25, 41],
     });
 
-    // const jittery = Array(5)
-    //   .fill(this.centroid)
-    //   .map((x) => [
-    //     x[0] + (Math.random() - 0.2),
-    //     x[1] + (Math.random() - 0.2),
-    //   ])
-    //   .map((x) =>
-    //     L.marker(x as L.LatLngExpression, { icon: markerIcon }).bindPopup(
-    //       'A random location on the map'
-    //     )
-    //   )
-    //   .forEach((x) => x.addTo(this.map));
+    const jittery = Array(5)
+      .fill(this.centroid)
+      .map((x) => [
+        x[0] + (Math.random() - 0.2),
+        x[1] + (Math.random() - 0.2),
+      ])
+      .map((x) =>
+        L.marker(x as L.LatLngExpression, { icon: markerIcon }).bindPopup(
+          'A random location on the map'
+        )
+      )
+      .forEach((x) => x.addTo(this.map));
     tiles.addTo(this.map);
   }
 }
