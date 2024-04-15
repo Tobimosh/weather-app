@@ -39,7 +39,6 @@ export class DaysHomeComponent {
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
             this.fetchForecast();
-            this.spinner.hide();
           }
         );
       }
@@ -51,6 +50,8 @@ export class DaysHomeComponent {
       .fetchWeatherCondition(this.latitude, this.longitude)
       .subscribe((res) => {
         this.forecastDetails = res;
+         this.spinner.hide();
+
       });
   }
 }
