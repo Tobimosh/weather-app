@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import * as L from 'leaflet'
 
 @Component({
   selector: 'app-map',
@@ -9,7 +10,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
   public myMap: L.Map;
   private centroid: L.LatLngExpression;
   private currentLocationMarker: any;
@@ -21,9 +22,9 @@ export class MapComponent implements OnInit {
     this.centroid = [0, 0];
   }
 
-  private async initMap(): Promise<void> {
+  private async initMap() {
     if (isPlatformBrowser(this.platformId)) {
-      const L = await import('leaflet');
+      // const L = await import('leaflet');
       console.log(L);
       this.myMap = L?.map('map', {
         center: this.centroid,
@@ -97,7 +98,7 @@ export class MapComponent implements OnInit {
     coordinates: L.LatLngExpression
   ): Promise<void> {
     if (isPlatformBrowser(this.platformId)) {
-      const L = await import('leaflet');
+      // const L = await import('leaflet');
       const markerIcon = L.icon({
         iconUrl: '../../assets/images/live-location.svg',
         iconSize: [50, 50],
@@ -109,7 +110,7 @@ export class MapComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.getLocation();
     }
