@@ -10,13 +10,13 @@
     <div>
       <app-time [forecastData]="forecastData"></app-time>
       <ng-container *ngFor="let dayWeatherGroup of groupByDay(forecastData?.list)">
-        <div class="mb-4">
+        <div class="mb-7">
           <div class="grid grid-cols-3 items-center gap-20">
             <div class="day">
               <p class="font-bold mb-1">{{ getDayName(dayWeatherGroup.dt_txt) }}</p>
               <p class="text-[10px]">{{ getDate(dayWeatherGroup.dt_txt) }}</p>
             </div>
-            <div class="degree">{{ dayWeatherGroup.main.temp }}°C</div>
+            <div class="degree font-semibold text-lg">{{ kelvinToCelsius( dayWeatherGroup.main.temp) }}°</div>
             <img *ngIf="dayWeatherGroup.weather[0]?.icon" class="w-12 h-12"
               [src]="'http://openweathermap.org/img/wn/' + dayWeatherGroup.weather[0]?.icon + '.png'"
               alt="Weather Icon" />

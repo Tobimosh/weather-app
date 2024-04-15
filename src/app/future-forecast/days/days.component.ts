@@ -39,7 +39,9 @@ export class DaysComponent {
     const date = new Date(dateTimeString);
     return `${date.getDate()} ${this.getMonthName(date.getMonth())}`;
   }
-
+  kelvinToCelsius(tempKelvin: number): number {
+    return Math.floor(tempKelvin - 273.15);
+  }
   getMonthName(monthIndex: number): string {
     const months = [
       'January',
@@ -58,7 +60,6 @@ export class DaysComponent {
     return months[monthIndex];
   }
 
- 
   groupByDay(list: List[]): List[] {
     const result: List[] = [];
     const dayMap: Map<string, List> = new Map();
