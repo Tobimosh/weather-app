@@ -7,12 +7,15 @@
       <!-- <span>{{weatherData?.name}}</span> -->
     </nav>
     <p class="mb-4">Today</p>
-    <div>
+    <ng-container *ngIf="forecastData">
       <app-time [forecastData]="forecastData"></app-time>
+    </ng-container>
+    <div>
       <ng-container *ngFor="let dayWeatherGroup of groupByDay(forecastData?.list)">
         <div class="mb-7">
           <div class="grid grid-cols-3 items-center gap-20">
             <div class="day">
+              
               <p class="font-bold mb-1">{{ getDayName(dayWeatherGroup.dt_txt) }}</p>
               <p class="text-[10px]">{{ getDate(dayWeatherGroup.dt_txt) }}</p>
             </div>

@@ -1,13 +1,9 @@
 <div class="section">
   <div class="conditionContainer">
-    <div *ngFor="let item of forecastData?.list" class="weatherCondition">
-      <p class="text-[#8b8b8b]">{{ getTime(item?.dt_txt) }}</p>
-      <img
-        class="icon"
-        src="http://openweathermap.org/img/wn/{{ item?.weather[0].icon }}.png"
-        alt="Weather Icon"
-      />
-      <p class="font-semibold">{{ kelvinToCelsius(item?.wind.deg) }}°</p>
+    <div *ngFor="let item of currentDayData" class="weatherCondition">
+      <p class="text-[#8b8b8b]">{{ getFormattedTime(item) }}</p>
+      <img class="icon" [src]="getWeatherIconUrl(item.weather[0].icon)" alt="Weather Icon" />
+      <p class="font-semibold">{{ kelvinToCelsius(item.main.temp) }}°</p>
     </div>
   </div>
 </div>

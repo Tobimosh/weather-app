@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ForeCastWeather } from '../models/forecastWeather.model';
+import { ForeCastWeather, List } from '../models/forecastWeather.model';
 import { WeatherForecastService } from '../weather-forecast.service';
 
 @Component({
@@ -13,26 +13,40 @@ import { WeatherForecastService } from '../weather-forecast.service';
 })
 export class TimeComponent {
   @Input() forecastData: ForeCastWeather;
+  currentDayData: List[] = [];
 
   constructor() {}
- 
 
+  ngOnInit() {
+    if (this.forecastData) {
+      this.filterCurrentDayData();
+    }
+  }
   kelvinToCelsius(tempKelvin: number): number {
     return Math.floor(tempKelvin - 273.15);
   }
 
-  getTime(dateTimeString: string): string {
-    const date = new Date(dateTimeString);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    return `${this.padZero(hours)}:${this.padZero(minutes)}`;
+  filterCurrentDayData() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    this.currentDayData = this.forecastData.list.filter((item) => {
+      const entryDate = new Date(item.dt * 1000);
+      return entryDate.getDate() === currentDay;
+    });
   }
 
   padZero(num: number): string {
     return num < 10 ? '0' + num : num.toString();
   }
 
+  getFormattedTime(item: List): string {
+    const date = new Date(item.dt * 1000);
+    const hours = this.padZero(date.getHours());
+    const minutes = this.padZero(date.getMinutes());
+    return `${hours}:${minutes}`;
+  }
+
   getWeatherIconUrl(icon: string): string {
-    return `assets/icons/${icon}.png`;
+    return `http://openweathermap.org/img/wn/${icon}.png`;
   }
 }

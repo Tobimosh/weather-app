@@ -3,8 +3,15 @@
   display: flex;
   overflow: scroll;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  gap: 20px;
+  gap: 30px;
+}
+.weatherCondition:last-child{
+  align-items: end;
+}
+.weatherCondition:first-child {
+  align-items: start;
 }
 .conditionContainer::-webkit-scrollbar {
   display: none;
