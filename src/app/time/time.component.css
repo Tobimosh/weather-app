@@ -23,16 +23,13 @@
 }
 .weatherCondition {
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
 }
-
-img{
-  width: 40px;
-}
+ 
 .section {
   width: 100%;
   color: black;
