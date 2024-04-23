@@ -14,7 +14,6 @@ import { GraphComponent } from '../graph/graph.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    FontAwesomeModule,
     ContainerComponent,
     DatePipe,
     TimeComponent,
@@ -31,11 +30,11 @@ export class HomeComponent {
   @Input() forecastWeather: ForeCastWeather;
   currentTime: string;
 
-  constructor(private weatherService: WeatherForecastService) {
+  constructor() {
     this.currentTime = this.getCurrentTime();
   }
 
-  private getCurrentTime(): string {
+   getCurrentTime(): string {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
@@ -101,7 +100,7 @@ export class HomeComponent {
   }
 
   kelvinToCelsius(tempKelvin: number): number {
-    return Math.floor(tempKelvin - 273.15);
+    return Math.floor(tempKelvin - 273);
   }
 
   getBackgroundImage(): string {
@@ -130,7 +129,7 @@ export class HomeComponent {
       case 'night-snowy':
         return '../../assets/images/night-snowy-background.jpg';
       default:
-        return ''; // You can provide a default background image or handle other conditions as needed
+        return '';
     }
   }
 }

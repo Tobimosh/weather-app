@@ -4,7 +4,7 @@ import { WeatherHomeComponent } from './weather-home/weather-home.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchLocationComponent } from '../search/search-location/search-location.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: FooterComponent,

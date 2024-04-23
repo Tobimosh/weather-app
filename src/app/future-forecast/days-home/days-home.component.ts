@@ -1,11 +1,9 @@
+import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { DaysComponent } from '../days/days.component';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ForeCastWeather } from '../../models/forecastWeather.model';
 import { WeatherForecastService } from '../../weather-forecast.service';
-import { WeatherData } from '../../models/weather.model';
-import { WeatherService } from '../../weather.service';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { isPlatformBrowser } from '@angular/common';
+import { DaysComponent } from '../days/days.component';
 
 @Component({
   selector: 'app-days-home',

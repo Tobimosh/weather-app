@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ForeCastWeather, List } from '../models/forecastWeather.model';
-import { WeatherForecastService } from '../weather-forecast.service';
 
 @Component({
   selector: 'app-time',

@@ -4,6 +4,7 @@ import { WeatherForecastService } from '../../weather-forecast.service';
 import { Chart, registerables } from 'chart.js';
 import { ForeCastWeather } from '../../models/forecastWeather.model';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { Weather } from '../../models/weather.model';
 
 @Component({
   selector: 'app-graph',
@@ -39,7 +40,8 @@ export class GraphComponent {
     setTimeout(() =>     this.processForecastData(this.forecastData), 4000)
   }
 
-  processForecastData(data: any) {
+  processForecastData(data: ForeCastWeather) {
+    console.log(data)
     const timeIntervals = {
       Morning: [6, 7, 8, 9],
       Afternoon: [12, 13, 14, 15],
@@ -79,7 +81,6 @@ export class GraphComponent {
       { data: temperatureAverages, label: 'Average Temperature' },
     ];
 
-    console.log(this.temperatureChartData);
     this.chartData = new Chart('canvas', {
       type: 'line',
       data: {
