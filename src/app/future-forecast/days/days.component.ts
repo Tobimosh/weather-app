@@ -1,11 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { ContainerComponent } from '../../container/container.component';
-import { TimeComponent } from '../../time/time.component';
-import { RouterLink } from '@angular/router';
-import { ForeCastWeather, List } from '../../models/forecastWeather.model';
-import { WeatherForecastService } from '../../weather-forecast.service';
 import { CommonModule } from '@angular/common';
-import { WeatherData } from '../../models/weather.model';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContainerComponent } from '../../container/container.component';
+import { ForeCastWeather, List } from '../../models/forecastWeather.model';
+import { TimeComponent } from '../../time/time.component';
 
 @Component({
   selector: 'app-days',
@@ -16,7 +14,6 @@ import { WeatherData } from '../../models/weather.model';
 })
 export class DaysComponent {
   @Input() forecastData: ForeCastWeather;
-  // @Input() weatherData: WeatherData;
   latitude: number;
   longitude: number;
   errorMessage: string;
@@ -40,7 +37,7 @@ export class DaysComponent {
     return `${date.getDate()} ${this.getMonthName(date.getMonth())}`;
   }
   kelvinToCelsius(tempKelvin: number): number {
-    return Math.floor(tempKelvin - 273.15);
+    return Math.floor(tempKelvin - 273);
   }
   getMonthName(monthIndex: number): string {
     const months = [

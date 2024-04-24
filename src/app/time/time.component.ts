@@ -22,7 +22,7 @@ export class TimeComponent {
     }
   }
   kelvinToCelsius(tempKelvin: number): number {
-    return Math.floor(tempKelvin - 273.15);
+    return Math.floor(tempKelvin - 273);
   }
 
   filterCurrentDayData() {

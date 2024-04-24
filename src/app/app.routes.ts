@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './weather/home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { WeatherHomeComponent } from './weather/weather-home/weather-home.component';
 import { DaysHomeComponent } from './future-forecast/days-home/days-home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   {

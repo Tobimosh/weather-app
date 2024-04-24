@@ -13,7 +13,7 @@ import * as L from 'leaflet'
 export class MapComponent {
   public myMap: L.Map;
   private centroid: L.LatLngExpression;
-  private currentLocationMarker: any;
+   currentLocationMarker: any;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -22,7 +22,7 @@ export class MapComponent {
     this.centroid = [0, 0];
   }
 
-  private async initMap() {
+   async initMap() {
     if (isPlatformBrowser(this.platformId)) {
       // const L = await import('leaflet');
       console.log(L);
@@ -76,6 +76,7 @@ export class MapComponent {
               position.coords.latitude,
               position.coords.longitude,
             ];
+            console.log('hereeee')
             this.initMap().then(() => {
               this.addCurrentLocationMarker(this.centroid);
               this.myMap.setView(this.centroid, 10);
@@ -94,7 +95,7 @@ export class MapComponent {
     }
   }
 
-  private async addCurrentLocationMarker(
+  async addCurrentLocationMarker(
     coordinates: L.LatLngExpression
   ): Promise<void> {
     if (isPlatformBrowser(this.platformId)) {

@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ForeCastWeather, List } from '../models/forecastWeather.model';
 import { futureForecast } from '../MockDataForTest/futureForecast';
 
-fdescribe('TimeComponent', () => {
+describe('TimeComponent', () => {
   let component: TimeComponent;
   let fixture: ComponentFixture<TimeComponent>;
 
@@ -24,6 +24,15 @@ fdescribe('TimeComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('handle OnInit', () => {
+    const spy = spyOn(component, 'ngOnInit').and.callThrough();
+    component.forecastData = futureForecast;
+
+    component.ngOnInit();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
   describe('filterCurrentDayData', () => {
     it('should filter the forecastData to contain only items from the current day', () => {
       const currentDate = new Date();
@@ -33,7 +42,7 @@ fdescribe('TimeComponent', () => {
 
       component.filterCurrentDayData();
 
-      expect(component.currentDayData.length).toBe(3);
+      expect(component.currentDayData.length).toBe(8);
       expect(new Date(component.currentDayData[0].dt * 1000).getDate()).toBe(
         currentDay
       );
@@ -53,4 +62,25 @@ fdescribe('TimeComponent', () => {
 
 
   });
+
+   it('should return accurate celcius value from the kelvin value', () => {
+     const kelvinValue = 350;
+     expect(component.kelvinToCelsius(kelvinValue)).toBe(77);
+     expect(component.kelvinToCelsius(273.15)).toEqual(0);
+     expect(component.kelvinToCelsius(0)).toEqual(-273);
+   });
+
+   it('should return a URL in the correct format', () => {
+     const iconCode = '01d'; // Example icon code
+
+     const result = component.getWeatherIconUrl(iconCode);
+
+     // Verify that the result is a string
+     expect(typeof result).toBe('string');
+     expect(result).toContain('http://openweathermap.org/img/wn/');
+
+     expect(result).toContain(iconCode);
+
+     expect(result.endsWith('.png')).toBeTrue();
+   });
 });

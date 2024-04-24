@@ -45,7 +45,10 @@ export class WeatherHomeComponent {
             this.fetchForecast();
           },
           (error: GeolocationPositionError) => {
+          
+            console.log(error, 'code')
             switch (error.code) {
+
               case error.PERMISSION_DENIED:
                 this.errorMessage = 'User denied the request for Geolocation.';
                 break;
@@ -59,9 +62,7 @@ export class WeatherHomeComponent {
             }
           }
         );
-      } else {
-        this.errorMessage = 'Geolocation is not supported by this browser.';
-      }
+      } 
     }
     
   }

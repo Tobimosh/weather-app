@@ -58,15 +58,15 @@ export class HomeComponent {
       return 'unknown';
     }
 
-    const currentDate = new Date();
-    const sunriseTime = new Date(this.weather.sys.sunrise * 1000);
-    const sunsetTime = new Date(this.weather.sys.sunset * 1000);
-
+    const currentDate = new Date().getHours();
+    const sunriseTime = new Date(this.weather.sys.sunrise * 1000).getHours();
+    const sunsetTime = new Date(this.weather.sys.sunset * 1000).getHours();
+    
     const isDaytime = currentDate >= sunriseTime && currentDate < sunsetTime;
-
     const mainWeather = this.weather.weather[0]?.main.toLowerCase();
 
     if (isDaytime) {
+
       switch (mainWeather) {
         case 'rain':
           return 'day-rainy';
@@ -77,7 +77,7 @@ export class HomeComponent {
         case 'snow':
           return 'day-snowy';
         case 'thunderstorm':
-          return 'thunderstorm';
+          return 'day-thunderstorm';
         default:
           return 'day-unknown';
       }
@@ -92,7 +92,7 @@ export class HomeComponent {
         case 'snow':
           return 'night-snowy';
         case 'thunderstorm':
-          return 'thunderstorm'
+          return 'night-thunderstorm'
         default:
           return 'night-unknown';
       }
